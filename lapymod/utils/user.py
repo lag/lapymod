@@ -41,8 +41,15 @@ class User:
                 return getHumanized('stickers',stickers)
         return []
 
-    def update(self,uuid):
-        r = get("https://dl.labymod.net/userdata/{}.json".format(uuid))
+    def setUser(self,uuid):
+        self._uuid = UUID(uuid)
+        if uuid != None:
+            return True
+        else:
+            raise AttributeError("User must be given a UUID.")
+
+    def update(self):
+        r = get("https://dl.labymod.net/userdata/{}.json".format(self._uuid))
         try:
             self._data = loads(r.content)
         except:
@@ -50,8 +57,5 @@ class User:
         return self._data
 
     def __init__(self,uuid=None):
-        uuid = UUID(uuid)
-        if uuid != None:
-            self._data = self.update(uuid)
-        else:
-            raise AttributeError("User must be given a UUID.")
+        self.setUser(uuid)
+        self.update()

@@ -5,7 +5,7 @@ with open('README.md','r') as fh:
 
 setuptools.setup(
     name="lapymod",
-    version="1.0.3",
+    version="1.1",
     author="Lag",
     author_email="no@email.com",
     description="A simple wrapper for Labymod's API.",
